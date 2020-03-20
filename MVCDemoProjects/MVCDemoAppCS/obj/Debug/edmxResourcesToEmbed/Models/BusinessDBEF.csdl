@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BusinessDBEF" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="BusinessDBEFContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="BusinessDBEF.Category" />
+    <EntitySet Name="Products" EntityType="BusinessDBEF.Product" />
+    <AssociationSet Name="Product_Category_FK" Association="BusinessDBEF.Product_Category_FK">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Customers" EntityType="BusinessDBEF.Customer" />
+    <EntitySet Name="Orders" EntityType="BusinessDBEF.Order" />
+    <EntitySet Name="OrderDetails" EntityType="BusinessDBEF.OrderDetail" />
+    <AssociationSet Name="FK_Order_ToCustomer" Association="BusinessDBEF.FK_Order_ToCustomer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ToOrder" Association="BusinessDBEF.FK_OrderDetail_ToOrder">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ToProduct" Association="BusinessDBEF.FK_OrderDetail_ToProduct">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="BusinessDBEF.Product_Category_FK" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="BusinessDBEF.Product_Category_FK" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="BusinessDBEF.FK_OrderDetail_ToProduct" FromRole="Product" ToRole="OrderDetail" />
+  </EntityType>
+  <Association Name="Product_Category_FK">
+    <End Type="BusinessDBEF.Category" Role="Category" Multiplicity="1" />
+    <End Type="BusinessDBEF.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Orders" Relationship="BusinessDBEF.FK_Order_ToCustomer" FromRole="Customer" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Customer" Relationship="BusinessDBEF.FK_Order_ToCustomer" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="OrderDetails" Relationship="BusinessDBEF.FK_OrderDetail_ToOrder" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Order" Relationship="BusinessDBEF.FK_OrderDetail_ToOrder" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="BusinessDBEF.FK_OrderDetail_ToProduct" FromRole="OrderDetail" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Order_ToCustomer">
+    <End Type="BusinessDBEF.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="BusinessDBEF.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ToOrder">
+    <End Type="BusinessDBEF.Order" Role="Order" Multiplicity="1" />
+    <End Type="BusinessDBEF.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ToProduct">
+    <End Type="BusinessDBEF.Product" Role="Product" Multiplicity="1" />
+    <End Type="BusinessDBEF.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
