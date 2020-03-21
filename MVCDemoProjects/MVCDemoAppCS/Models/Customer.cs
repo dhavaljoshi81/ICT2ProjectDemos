@@ -23,6 +23,7 @@ namespace MVCDemoAppCS.Models
         }
     
         public int CustomerId { get; set; }
+        [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
 
         //[DataType(DataType.Date)]

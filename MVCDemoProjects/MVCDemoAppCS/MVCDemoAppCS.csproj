@@ -135,6 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\OrderSearchController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -166,6 +167,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>BusinessDBEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderSearch.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>BusinessDBEF.tt</DependentUpon>
     </Compile>
@@ -303,6 +305,8 @@
     <Content Include="Views\CustomerOrder\Details.cshtml" />
     <Content Include="Views\CustomerOrder\Edit.cshtml" />
     <Content Include="Views\CustomerOrder\Index.cshtml" />
+    <Content Include="Views\OrderSearch\Search.cshtml" />
+    <Content Include="Views\OrderSearch\SearchByCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -318,6 +322,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

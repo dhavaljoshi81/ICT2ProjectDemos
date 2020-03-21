@@ -56,4 +56,5 @@ G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\bin\Microsoft.CodeDom.Providers.DotNetC
 G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\obj\Debug\MVCDemoAppCS.csproj.CopyComplete
 G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\obj\Debug\MVCDemoAppCS.dll
 G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\obj\Debug\MVCDemoAppCS.pdb
+G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\obj\Debug\MVCDemoAppCS.csproj.CoreCompileInputs.cache
 G:\ICT22020\MVCDemoProjects\MVCDemoAppCS\obj\Debug\MVCDemoAppCS.csprojAssemblyReference.cache

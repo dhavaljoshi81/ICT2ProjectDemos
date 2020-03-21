@@ -15,10 +15,36 @@ namespace MVCDemoAppCS.Controllers
         private BusinessDBEFContainer db = new BusinessDBEFContainer();
 
         // GET: CustomerOrder
-        public ActionResult Index()
+        public ActionResult Index(int? Id = -1, string CustName = "")
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderDetails);
-            return View(orders.ToList());
+
+            if (Id != -1 && !CustName.Equals(""))  
+            {
+                var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderDetails)
+                    .Where(co => co.OrderId == Id)
+                    .Where(co => co.Customer.CustomerName.Equals(CustName));
+
+                return View(orders.ToList());
+            }
+            else if (!CustName.Equals(""))
+            {
+                var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderDetails)
+                    .Where(co => co.Customer.CustomerName.Equals(CustName));
+
+                return View(orders.ToList());
+            }
+            else if (Id != -1)
+            {
+                var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderDetails)
+                    .Where(co => co.CustomerId == Id);
+
+                return View(orders.ToList());
+            }
+            else
+            {
+                var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderDetails);
+                return View(orders.ToList());
+            }
         }
 
         // GET: CustomerOrder/Details/5
@@ -69,11 +95,14 @@ namespace MVCDemoAppCS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Orders.Find(id);
+            
             if (order == null)
             {
                 return HttpNotFound();
             }
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerId", "CustomerName", order.CustomerId);
+            var custOrderDetail = db.OrderDetails.Where(cod => cod.OrderId == id);
+            ViewBag.CustomerOrderDetail = custOrderDetail;
             return View(order);
         }
 
