@@ -1,0 +1,24 @@
+<h1 id="tableLabel">Books</h1>
+
+<p>List of Books.</p>
+
+<p *ngIf="!books"><em>It is Loading Book Data...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="books">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{ book.id }} </td>
+      <td>{{ book.title }} </td>
+      <td>{{ book.author }} </td>
+      <td>{{ book.price }} </td>
+    </tr>
+  </tbody>
+</table>
