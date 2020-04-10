@@ -1,0 +1,8 @@
+G:\ICT22020\ICT2DemoProjects\bin\Debug\ICT2DemoProjects.exe.config
+G:\ICT22020\ICT2DemoProjects\bin\Debug\ICT2DemoProjects.exe
+G:\ICT22020\ICT2DemoProjects\bin\Debug\ICT2DemoProjects.pdb
+G:\ICT22020\ICT2DemoProjects\obj\Debug\ConAppDemoCS.csprojAssemblyReference.cache
+G:\ICT22020\ICT2DemoProjects\obj\Debug\ICT2DemoProjects.exe
+G:\ICT22020\ICT2DemoProjects\obj\Debug\ICT2DemoProjects.pdb
+G:\ICT22020\ICT2DemoProjects\bin\Debug\StudentDB.mdf
+G:\ICT22020\ICT2DemoProjects\bin\Debug\StudentDB_log.ldf
